@@ -1,0 +1,32 @@
+@model Purchase
+
+@{
+    ViewData["Title"] = "Acquista";
+}
+
+<h2>Acquista Prodotto</h2>
+<form class="m-2" method="post" asp-action="Cart" onsubmit="return validateQuantity()">
+    <div class="input-container">
+        <label for="NomeProdotto">Nome Prodotto:</label>
+        <input type="text" id="NomeProdotto" name="NomeProdotto" class="form-control" required>
+    </div>
+
+    <div class="input-container">
+        <label for="Quantita">Quantità:</label>
+        <input type="number" id="Quantita" name="Quantita" class="form-control">
+    </div>
+
+    <button type="submit" id="bottoneRegistrazione" class="btn btn-primary mt-3">Aggiungi al Carrello</button>
+</form>
+
+<script>
+    function validateQuantity() {
+        var quantity = document.getElementById("Quantita").value;
+
+        if (quantity <= 0) {
+            alert("La quantità non può essere negativa o uguale a 0.");
+            return false;
+        }
+        return true;
+    }
+</script>

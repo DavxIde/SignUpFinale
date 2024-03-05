@@ -1,0 +1,76 @@
+@model Login
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .input-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .input-container input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            box-sizing: border-box;
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Login</h1>
+
+    <form class="m-2" id="loginForm" method="post" asp-controller="Home" asp-action="Login">
+        <div class="input-container">
+            <label for="Nome_Utente">Nome Utente:</label>
+            <input type="text" id="Nome_Utente" name="Nome_Utente" class="form-control" required>
+        </div>
+
+        <div class="input-container">
+            <label for="Password">Password:</label>
+            <input type="password" id="Password" name="Password" class="form-control" required>
+        </div>
+        
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+        <button type="submit" id="loginButton" class="btn btn-primary">Login</button>
+    </form>
+    
+    <script>
+        // Funzione per reindirizzare alla homepage dopo il login
+        function redirectToHome() {
+            window.location.href = "/Home/Index";
+        }
+
+        // Funzione per la validazione del login
+        function validateLogin(event) {
+            event.preventDefault(); 
+
+            var Nome_Utente = document.getElementById("Nome_Utente").value;
+            var Password = document.getElementById("Password").value;
+            
+            // Qui puoi eseguire la tua logica di autenticazione
+            if (Nome_Utente === "q" && Password === "q") {
+                // Se l'autenticazione è riuscita, reindirizza alla homepage
+                redirectToHome();
+            } else {
+                // Altrimenti, mostra un messaggio di errore
+                document.getElementById("errorMessage").innerText = "Credenziali non valide. Riprova.";
+                document.getElementById("errorMessage").style.display = "block";
+            }
+        }
+
+        // Aggiungi un gestore eventi per il submit del form
+        document.getElementById("loginForm").addEventListener("submit", validateLogin);
+    </script>
+
+</body>
+</html>

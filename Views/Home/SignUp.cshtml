@@ -1,0 +1,75 @@
+@model SignUp
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrazione</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .input-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .input-container input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            box-sizing: border-box;
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registrazione</h1>
+
+    <form class="m-2" method="post" asp-action="Registra" onsubmit="return validatePWsAndTime()">
+        <div class="input-container">
+            <label for="Username">Username:</label>
+            <input type="text" id="Username" name="Username" class="form-control" required>
+        </div>
+
+        <div class="input-container">
+            <label for="PW">PW:</label>
+            <input type="PW" id="PW" name="PW">
+        </div>
+
+        <div class="input-container">
+            <label for="confirm_PW">Conferma PW:</label>
+            <input type="PW" id="confirm_PW" name="confirm_PW">
+            <div id="PW-error" class="error-message"></div>
+        </div>
+
+        <button type="submit" id="bottoneRegistrazione" class="btn btn-primary">SignUp</button>
+    </form>
+
+    <script>
+        var startTime = new Date();
+
+        function validatePWsAndTime() {
+            var PW = document.getElementById("PW").value;
+            var confirm_PW = document.getElementById("confirm_PW").value;
+
+            var currentTime = new Date();
+            var timeDifference = currentTime - startTime; // Differenza di tempo in millisecondi
+
+            if (timeDifference > 5000000000) {
+                alert("Hai impiegato troppo tempo per compilare il modulo. Riprova.");
+                return false;
+            }
+
+            if (PW !== confirm_PW) {
+                document.getElementById("PW-error").innerText = "Le PW non coincidono.";
+                return false;
+            } else {
+                document.getElementById("PW-error").innerText = "";
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+@model Purchase
+@{
+    ViewData["Title"] = "Carrello";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nome Prodotto</th>
+            <th scope="col">Quantità</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.NomeProdotto</td>
+            <td>@Model.Quantita</td>
+        </tr>
+    </tbody>
+</table>
